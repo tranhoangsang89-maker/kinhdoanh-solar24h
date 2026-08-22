@@ -347,3 +347,42 @@ tr:hover td {
   padding: 8px 12px !important;
   font-size: 0.9em !important;
 }
+
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px;
+  }
+  .sidebar .user-info img {
+    width: 80px;
+    height: 80px;
+  }
+  .sidebar nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    white-space: nowrap;
+    padding-bottom: 5px;
+  }
+  .sidebar nav button {
+    flex: 0 0 auto;
+    width: auto;
+    margin-bottom: 0;
+  }
+  .main-content {
+    padding: 15px;
+  }
+  .kpi-cards {
+    grid-template-columns: 1fr;
+  }
+  .glass-card {
+    overflow-x: auto;
+  }
+}
