@@ -347,3 +347,51 @@ tr:hover td {
   padding: 8px 12px !important;
   font-size: 0.9em !important;
 }
+
+/* Responsive Mobile Bulletproof */
+@media screen and (max-width: 1200px) {
+  .app-container {
+    flex-direction: column !important;
+  }
+  .sidebar {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding: 10px !important;
+    min-height: auto !important;
+  }
+  .sidebar .user-info {
+    margin-bottom: 10px !important;
+  }
+  .sidebar .user-info img {
+    width: 60px !important;
+    height: 60px !important;
+    margin-bottom: 5px !important;
+  }
+  .sidebar nav {
+    display: flex !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    gap: 10px !important;
+    padding-bottom: 5px !important;
+    width: 100% !important;
+  }
+  .sidebar nav button {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    margin-bottom: 0 !important;
+  }
+  .sidebar .logout-btn {
+    margin-top: 10px !important;
+  }
+  .main-content {
+    padding: 10px !important;
+    width: 100% !important;
+  }
+  .kpi-cards, .grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+  .glass-card {
+    overflow-x: auto !important;
+  }
+}
