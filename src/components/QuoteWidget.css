@@ -1,0 +1,111 @@
+.quote-toggle-btn {
+  position: fixed;
+  bottom: 30px;
+  left: 280px; /* Adjust to sit next to the sidebar */
+  height: 55px;
+  border-radius: 27.5px;
+  padding: 0 24px;
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+  color: #111827;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  font-size: 1.05rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4), 0 0 0 0 rgba(245, 158, 11, 0.7);
+  z-index: 9998;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  animation: pulseGold 2s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+.quote-toggle-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+  animation: none;
+}
+
+.quote-toggle-btn.open {
+  background: #334155;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  animation: none;
+}
+
+@keyframes pulseGold {
+  to {
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4), 0 0 0 20px rgba(245, 158, 11, 0);
+  }
+}
+
+.quote-window {
+  position: fixed;
+  bottom: 100px;
+  left: 280px;
+  width: 450px;
+  height: 650px;
+  background: var(--sidebar-bg);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  border: 1px solid var(--border-highlight);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUpQuote 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.quote-header {
+  background: linear-gradient(135deg, var(--sidebar-bg) 0%, #1e293b 100%);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.quote-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #0ea5e9;
+  font-weight: 700;
+}
+
+.quote-iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: #fff;
+}
+
+@keyframes slideUpQuote {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 768px) {
+  .quote-window {
+    width: calc(100% - 40px);
+    left: 20px;
+    bottom: 90px;
+    height: calc(100vh - 120px);
+  }
+  
+  .quote-toggle-btn {
+    bottom: 20px;
+    left: 20px;
+    padding: 0 15px;
+    height: 45px;
+    font-size: 0.95rem;
+  }
+}
