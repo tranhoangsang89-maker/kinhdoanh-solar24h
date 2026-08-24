@@ -5,6 +5,7 @@ import {
   closestCorners,
   KeyboardSensor,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
@@ -49,6 +50,12 @@ export default function KanbanBoard({ user, isAdminView = false }) {
     useSensor(PointerSensor, {
       activationConstraint: {
         distance: 5,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
       },
     }),
     useSensor(KeyboardSensor, {
@@ -120,6 +127,15 @@ export default function KanbanBoard({ user, isAdminView = false }) {
     } catch (error) {
       console.error('Error updating status:', error.message);
     }
+  };
+
+  const handleStatusChange = async (leadId, newStatus) => {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === leadId ? { ...item, status: newStatus } : item
+      )
+    );
+    await updateLeadStatus(leadId, newStatus);
   };
 
   const handleDeleteLead = async (lead) => {
@@ -331,6 +347,7 @@ export default function KanbanBoard({ user, isAdminView = false }) {
               onUploadQuote={handleUploadQuote}
               onEditClick={handleEditLead}
               onDeleteClick={handleDeleteLead}
+              onStatusChange={handleStatusChange}
               isAdminView={isAdminView}
             />
           ))}

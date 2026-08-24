@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-export default function KanbanItem({ id, item, onSurveyClick, onQuoteClick, onUploadQuote, onEditClick, onDeleteClick, isOverlay, isAdminView }) {
+export default function KanbanItem({ id, item, onSurveyClick, onQuoteClick, onUploadQuote, onEditClick, onDeleteClick, onStatusChange, isOverlay, isAdminView }) {
   const {
     attributes,
     listeners,
@@ -144,6 +144,24 @@ export default function KanbanItem({ id, item, onSurveyClick, onQuoteClick, onUp
           </>
         )}
       </div>
+
+      {/* Mobile-friendly status change dropdown */}
+      {onStatusChange && !isAdminView && (
+        <div style={{ marginTop: '10px' }}>
+          <select 
+            value={item.status} 
+            onChange={(e) => { e.stopPropagation(); onStatusChange(item.id, e.target.value); }}
+            className="input-premium"
+            style={{ padding: '4px 8px', fontSize: '0.85rem', width: '100%', cursor: 'pointer' }}
+          >
+            <option value="Mới">Mới</option>
+            <option value="Khảo sát">Khảo sát</option>
+            <option value="Báo giá">Báo giá</option>
+            <option value="Chốt Deal">Chốt Deal</option>
+            <option value="Rớt Khách">Rớt Khách</option>
+          </select>
+        </div>
+      )}
     </div>
   );
 }

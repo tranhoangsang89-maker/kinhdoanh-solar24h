@@ -3,7 +3,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import KanbanItem from './KanbanItem';
 
-export default function KanbanColumn({ id, title, items, onSurveyClick, onQuoteClick, onUploadQuote, onEditClick, onDeleteClick, isAdminView }) {
+export default function KanbanColumn({ id, title, items, onSurveyClick, onQuoteClick, onUploadQuote, onEditClick, onDeleteClick, onStatusChange, isAdminView }) {
   const { setNodeRef } = useDroppable({
     id: id,
   });
@@ -27,6 +27,7 @@ export default function KanbanColumn({ id, title, items, onSurveyClick, onQuoteC
               onUploadQuote={onUploadQuote}
               onEditClick={onEditClick}
               onDeleteClick={onDeleteClick}
+              onStatusChange={onStatusChange}
               isAdminView={isAdminView}
             />
           ))}
