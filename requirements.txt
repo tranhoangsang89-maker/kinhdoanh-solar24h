@@ -1,7 +1,0 @@
-fastapi
-uvicorn
-sqlalchemy
-pillow
-python-multipart
-requests
-psycopg2-binary
