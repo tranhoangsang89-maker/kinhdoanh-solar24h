@@ -10,6 +10,7 @@ const COLORS = ['#0ea5e9', '#8b5cf6', '#f59e0b', '#10b981', '#ef4444'];
 
 export default function AdminDashboard({ user, onLogout, onUpdateUser }) {
   const [activeTab, setActiveTab] = useState('kpi')
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   
   // KPI Stats
   const [stats, setStats] = useState(null)
@@ -373,7 +374,16 @@ export default function AdminDashboard({ user, onLogout, onUpdateUser }) {
 
   return (
     <div className="app-container">
-      <div className="sidebar">
+      {/* Mobile Header */}
+      <div className="mobile-header">
+        <h3 className="glow-text-green" style={{ margin: 0 }}>Admin Solar 24h</h3>
+        <button className="hamburger-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          ☰
+        </button>
+      </div>
+
+      <div className={`sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
+        <button className="close-menu-btn" onClick={() => setIsMobileMenuOpen(false)}>✕</button>
         <div className="user-info" style={{ position: 'relative' }}>
           {isUpdatingProfile && <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', width: '100px', height: '100px', margin: '0 auto', zIndex: 10}}><small>Đang tải...</small></div>}
           <label style={{ cursor: 'pointer', display: 'block' }}>
@@ -389,15 +399,20 @@ export default function AdminDashboard({ user, onLogout, onUpdateUser }) {
           </h3>
         </div>
         <nav>
-          <button className={activeTab === 'kpi' ? 'active' : ''} onClick={() => setActiveTab('kpi')}>Tổng quan KPI</button>
-          <button className={activeTab === 'daily' ? 'active' : ''} onClick={() => setActiveTab('daily')}>Báo cáo hàng ngày</button>
-          <button className={activeTab === 'customers' ? 'active' : ''} onClick={() => setActiveTab('customers')}>Danh sách khách hàng</button>
-          <button className={activeTab === 'contracts' ? 'active' : ''} onClick={() => setActiveTab('contracts')}>Duyệt hợp đồng</button>
-          <button className={activeTab === 'salary' ? 'active' : ''} onClick={() => setActiveTab('salary')}>Tổng quan lương</button>
-          <button className={activeTab === 'completed' ? 'active' : ''} onClick={() => setActiveTab('completed')}>Khách đã lắp đặt</button>
+          <button className={activeTab === 'kpi' ? 'active' : ''} onClick={() => { setActiveTab('kpi'); setIsMobileMenuOpen(false); }}>Tổng quan KPI</button>
+          <button className={activeTab === 'daily' ? 'active' : ''} onClick={() => { setActiveTab('daily'); setIsMobileMenuOpen(false); }}>Báo cáo hàng ngày</button>
+          <button className={activeTab === 'customers' ? 'active' : ''} onClick={() => { setActiveTab('customers'); setIsMobileMenuOpen(false); }}>Danh sách khách hàng</button>
+          <button className={activeTab === 'contracts' ? 'active' : ''} onClick={() => { setActiveTab('contracts'); setIsMobileMenuOpen(false); }}>Duyệt hợp đồng</button>
+          <button className={activeTab === 'salary' ? 'active' : ''} onClick={() => { setActiveTab('salary'); setIsMobileMenuOpen(false); }}>Tổng quan lương</button>
+          <button className={activeTab === 'completed' ? 'active' : ''} onClick={() => { setActiveTab('completed'); setIsMobileMenuOpen(false); }}>Khách đã lắp đặt</button>
         </nav>
         <button className="logout-btn" onClick={onLogout}>Đăng xuất</button>
       </div>
+      
+      {/* Overlay for mobile */}
+      {isMobileMenuOpen && (
+        <div className="sidebar-overlay" onClick={() => setIsMobileMenuOpen(false)}></div>
+      )}
       
       <div className="main-content">
         

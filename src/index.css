@@ -79,7 +79,6 @@ h2 {
   margin-top: 5px;
 }
 
-/* True Glassmorphism Card */
 .glass-card {
   background: var(--card-bg);
   backdrop-filter: blur(12px);
@@ -91,6 +90,8 @@ h2 {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   margin-bottom: 24px;
+  overflow-x: auto; /* Fix for table overflow on mobile */
+  -webkit-overflow-scrolling: touch;
 }
 
 .glass-card:hover {
@@ -409,74 +410,111 @@ tr:hover td {
   }
 }
 
-/* Mobile Layout - Bottom Navigation Bar */
+.mobile-header {
+  display: none;
+}
+.close-menu-btn {
+  display: none;
+}
+.sidebar-overlay {
+  display: none;
+}
+
+/* Mobile Layout - Hamburger Menu */
 @media screen and (max-width: 768px) {
   .app-container {
     flex-direction: column !important;
     height: 100vh;
-    overflow: hidden;
   }
   
-  .main-content {
-    padding: 15px !important;
-    padding-bottom: 80px !important; /* Space for bottom nav */
-    flex: 1;
-    overflow-y: auto;
-    width: 100% !important;
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: var(--sidebar-bg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .hamburger-btn {
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    cursor: pointer;
   }
   
   .sidebar {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100% !important;
-    height: 65px;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 0 !important;
-    background: rgba(17, 24, 39, 0.95) !important;
-    backdrop-filter: blur(10px);
-    border-right: none !important;
-    border-top: 1px solid var(--border-color);
+    top: 0;
+    left: -100%;
+    width: 280px !important;
+    height: 100vh !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    transition: left 0.3s ease;
+    padding: 24px !important;
+    background: var(--sidebar-bg) !important;
     z-index: 1000;
   }
   
+  .sidebar.open {
+    left: 0;
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+  }
+
+  .close-menu-btn {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
   .sidebar .user-info {
-    display: none !important;
+    display: block !important;
+    margin-top: 20px;
   }
   
   .sidebar nav {
+    flex-direction: column !important;
     display: flex !important;
-    flex-direction: row !important;
-    width: 100%;
-    justify-content: space-around;
-    height: 100%;
   }
   
   .sidebar nav button {
-    flex: 1 !important;
-    text-align: center !important;
-    padding: 8px 4px !important;
-    margin: 0 !important;
-    font-size: 0.75rem !important;
-    border-radius: 0 !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    white-space: normal !important;
-    border: none !important;
-  }
-  
-  .sidebar nav button.active {
-    border-top: 3px solid var(--primary-color) !important;
-    background: linear-gradient(to top, rgba(16, 185, 129, 0.1) 0%, transparent 100%) !important;
-    box-shadow: none !important;
+    text-align: left !important;
+    padding: 12px 18px !important;
   }
   
   .sidebar .logout-btn {
-    display: none !important; /* Temporarily hidden on mobile bottom bar */
+    display: block !important;
+    margin-top: auto;
+  }
+  
+  .main-content {
+    padding: 15px !important;
+    padding-bottom: 30px !important;
+    flex: 1;
+    overflow-y: auto;
+    width: 100% !important;
   }
 
   .kpi-cards, .grid-2, .grid-3 {

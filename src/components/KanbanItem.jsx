@@ -146,7 +146,7 @@ export default function KanbanItem({ id, item, onSurveyClick, onQuoteClick, onUp
       </div>
 
       {/* Mobile-friendly status change dropdown */}
-      {onStatusChange && !isAdminView && (
+      {onStatusChange && (
         <div style={{ marginTop: '10px' }}>
           <select 
             value={item.status} 
